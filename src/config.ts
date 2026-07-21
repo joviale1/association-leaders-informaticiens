@@ -39,10 +39,12 @@ export interface AliEvent {
 export const ALI_CONFIG = {
   // Coordonnées de l'association
   contact: {
-    phone1: "+229 97 00 00 00", // À modifier selon le besoin
-    phone2: "+229 95 00 00 00", // À modifier selon le besoin
-    whatsapp: "+229 97 00 00 00", // Numéro WhatsApp de la Secrétaire ou du bureau
-    email: "contact.ali.benin@gmail.com",
+    phone1: "01 97 29 36 68", // Président (AGOSSOU Patrice)
+    phone2: "01 66 11 21 14", // Secrétaire Général (ZOSSOUNGBO A. Fidèle)
+    presidentPhone: "01 97 29 36 68",
+    sgPhone: "01 66 11 21 14",
+    whatsapp: "01 97 29 36 68", // WhatsApp
+    email: "leadersinformaticiens@gmail.com",
     address: "Agamandin, Abomey-Calavi, Bénin",
     apolitiqueInfo: "Association à caractère apolitique et à but non lucratif",
     devise: "ENSEMBLE, ON EST PLUS FORT !!",

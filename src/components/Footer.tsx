@@ -86,9 +86,22 @@ export default function Footer({ onNavigate }: FooterProps) {
               <span>{ALI_CONFIG.contact.address}</span>
             </div>
 
-            <div className="flex items-center gap-2.5">
-              <Smartphone className="w-4.5 h-4.5 text-turquoise-500 flex-shrink-0" />
-              <span>{ALI_CONFIG.contact.phone1} / {ALI_CONFIG.contact.phone2}</span>
+            <div className="flex items-start gap-2.5">
+              <Smartphone className="w-4.5 h-4.5 text-turquoise-500 flex-shrink-0 mt-1" />
+              <div className="flex flex-col gap-1 text-xs sm:text-sm">
+                <div>
+                  <span className="font-semibold text-white/90">Président : </span>
+                  <a href={`tel:${ALI_CONFIG.contact.phone1.replace(/\s+/g, '')}`} className="hover:text-turquoise-500 transition-colors font-mono">
+                    {ALI_CONFIG.contact.phone1}
+                  </a>
+                </div>
+                <div>
+                  <span className="font-semibold text-white/90">Secrétaire Général : </span>
+                  <a href={`tel:${ALI_CONFIG.contact.phone2.replace(/\s+/g, '')}`} className="hover:text-turquoise-500 transition-colors font-mono">
+                    {ALI_CONFIG.contact.phone2}
+                  </a>
+                </div>
+              </div>
             </div>
 
             <div className="flex items-center gap-2.5">
