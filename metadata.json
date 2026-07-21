@@ -1,0 +1,6 @@
+{
+  "name": "Association des Leaders Informaticiens",
+  "description": "Site vitrine officiel de l'Association des Leaders Informaticiens (ALI) du Bénin — Abomey-Calavi.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

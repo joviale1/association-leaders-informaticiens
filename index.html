@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Association des Leaders Informaticiens (ALI) — Bénin</title>
+    <meta name="description" content="Site vitrine de l'Association des Leaders Informaticiens (ALI) du Bénin - Abomey-Calavi. Unir les acteurs de l'informatique." />
+    <meta name="theme-color" content="#1CADC4" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" href="https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=192&h=192&fit=crop&q=80" />
+  </head>
+  <body class="bg-[#fafbfc] text-[#0B2545] font-sans antialiased selection:bg-[#1CADC4] selection:text-white">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(reg => console.log('Service Worker enregistré !', reg))
+            .catch(err => console.log('Erreur Service Worker', err));
+        });
+      }
+    </script>
+  </body>
+</html>
+

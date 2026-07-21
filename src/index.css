@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Poppins", "Inter", sans-serif;
+  --color-turquoise-500: #1CADC4;
+  --color-turquoise-600: #1693a7;
+  --color-marine-900: #0B2545;
+  --color-marine-950: #051329;
+  --color-accent-red: #D62828;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Animations custom et styles */
+.gradient-bg {
+  background: linear-gradient(135deg, #0B2545 0%, #051329 100%);
+}
+
+.glow-hover:hover {
+  box-shadow: 0 0 15px rgba(28, 173, 196, 0.4);
+}
+

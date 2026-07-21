@@ -1,0 +1,22 @@
+{
+  "short_name": "ALI Bénin",
+  "name": "Association des Leaders Informaticiens",
+  "description": "Site officiel de l'Association des Leaders Informaticiens (ALI) du Bénin.",
+  "icons": [
+    {
+      "src": "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=192&h=192&fit=crop&q=80",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=512&h=512&fit=crop&q=80",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#0B2545",
+  "theme_color": "#1CADC4",
+  "display": "standalone",
+  "orientation": "portrait"
+}
