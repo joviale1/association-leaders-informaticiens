@@ -5,9 +5,10 @@ import { ALI_CONFIG } from "../config";
 
 interface HeroProps {
   onJoinClick: () => void;
+  onNavigate: (sectionId: string) => void;
 }
 
-export default function Hero({ onJoinClick }: HeroProps) {
+export default function Hero({ onJoinClick, onNavigate }: HeroProps) {
   return (
     <section
       id="accueil"
@@ -84,12 +85,12 @@ export default function Hero({ onJoinClick }: HeroProps) {
               <span>Devenir Membre</span>
               <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1.5" />
             </button>
-            <a
-              href="#tarifs"
-              className="bg-white/10 hover:bg-white/15 text-white font-semibold tracking-wide px-8 py-4 rounded-xl border border-white/10 transition-all duration-300 hover:scale-102 text-center"
+            <button
+              onClick={() => onNavigate("tarifs")}
+              className="bg-white/10 hover:bg-white/15 text-white font-semibold tracking-wide px-8 py-4 rounded-xl border border-white/10 transition-all duration-300 hover:scale-102 text-center cursor-pointer"
             >
               Voir les Formations
-            </a>
+            </button>
           </motion.div>
 
           {/* Quick Metrics */}

@@ -13,6 +13,27 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState<"home" | "annuaire">("home");
   const [activeSection, setActiveSection] = useState("accueil");
   const [prefilledInterest, setPrefilledInterest] = useState("");
+  const [pendingScroll, setPendingScroll] = useState<string | null>(null);
+
+  // Helper to map section IDs to actual element IDs
+  const getTargetElementId = (sectionId: string) => {
+    switch (sectionId) {
+      case "propos":
+        return "ali-vision-section";
+      case "bureau":
+        return "ali-bureau-section";
+      case "tarifs":
+        return "ali-tarifs-section";
+      case "evenements":
+        return "ali-events-section";
+      case "devenir-membre":
+        return "ali-register-section";
+      case "accueil":
+        return "accueil";
+      default:
+        return "accueil";
+    }
+  };
 
   // Smooth scroll handler to target section ID or switch pages
   const handleNavigation = (sectionId: string) => {
@@ -24,41 +45,12 @@ export default function App() {
     }
 
     if (currentPage !== "home") {
+      setPendingScroll(sectionId);
       setCurrentPage("home");
       setActiveSection(sectionId);
-      setTimeout(() => {
-        const targetElement = document.getElementById(
-          sectionId === "propos" 
-            ? "ali-vision-section" 
-            : sectionId === "bureau"
-            ? "ali-bureau-section"
-            : sectionId === "tarifs"
-            ? "ali-tarifs-section"
-            : sectionId === "evenements"
-            ? "ali-events-section"
-            : sectionId === "devenir-membre"
-            ? "ali-register-section"
-            : "accueil"
-        );
-
-        if (targetElement) {
-          targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-      }, 150);
     } else {
-      const targetElement = document.getElementById(
-        sectionId === "propos" 
-          ? "ali-vision-section" 
-          : sectionId === "bureau"
-          ? "ali-bureau-section"
-          : sectionId === "tarifs"
-          ? "ali-tarifs-section"
-          : sectionId === "evenements"
-          ? "ali-events-section"
-          : sectionId === "devenir-membre"
-          ? "ali-register-section"
-          : "accueil"
-      );
+      const targetId = getTargetElementId(sectionId);
+      const targetElement = document.getElementById(targetId);
 
       if (targetElement) {
         targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -67,24 +59,35 @@ export default function App() {
     }
   };
 
+  // Trigger scroll after page mounts home
+  useEffect(() => {
+    if (currentPage === "home" && pendingScroll) {
+      const timer = setTimeout(() => {
+        const targetId = getTargetElementId(pendingScroll);
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+        setPendingScroll(null);
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [currentPage, pendingScroll]);
+
   // Callback to select training from TarifsFormations or Events and smooth scroll to form
   const handleSelectInterest = (interestTitle: string) => {
     setPrefilledInterest(interestTitle);
     
     if (currentPage !== "home") {
+      setPendingScroll("devenir-membre");
       setCurrentPage("home");
-      setTimeout(() => {
-        const target = document.getElementById("ali-register-section");
-        if (target) {
-          target.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-      }, 150);
     } else {
       // Smooth scroll to register section
       const target = document.getElementById("ali-register-section");
       if (target) {
         target.scrollIntoView({ behavior: "smooth", block: "start" });
       }
+      setActiveSection("devenir-membre");
     }
   };
 
@@ -140,7 +143,10 @@ export default function App() {
         ) : (
           <>
             {/* Section 1: Hero */}
-            <Hero onJoinClick={() => handleNavigation("devenir-membre")} />
+            <Hero 
+              onJoinClick={() => handleNavigation("devenir-membre")} 
+              onNavigate={handleNavigation}
+            />
 
             {/* Section 2: Notre Vision & Nos Objectifs (combined beautifully in Vision) */}
             <Vision />

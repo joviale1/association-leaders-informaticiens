@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Search, Filter, BookOpen, Clock, Coins, ChevronRight, HelpCircle, ArrowRight, Printer, Cpu, FileText, CheckCircle } from "lucide-react";
-import { ALI_CONFIG, PrestationPrice, TrainingModule } from "../config";
+import { Search, Filter, BookOpen, Clock, Coins, ChevronRight, HelpCircle, ArrowRight, Printer, Cpu, FileText, CheckCircle, Copy, Scan, Image, Palette, Layers, Activity } from "lucide-react";
+import { ALI_CONFIG, PrestationPrice, TrainingModule, ReliureTarif } from "../config";
 
 interface TarifsFormationsProps {
   onSelectTraining: (trainingTitle: string) => void;
@@ -9,6 +9,7 @@ interface TarifsFormationsProps {
 
 export default function TarifsFormations({ onSelectTraining }: TarifsFormationsProps) {
   const [activeTab, setActiveTab] = useState<"tarifs" | "formations">("formations");
+  const [prestationSubTab, setPrestationSubTab] = useState<"general" | "reliure">("general");
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("Tous");
 
@@ -24,10 +25,18 @@ export default function TarifsFormations({ onSelectTraining }: TarifsFormationsP
 
   const getCategoryIcon = (category: string) => {
     switch (category) {
-      case "Bureautique":
+      case "Saisie & Impression":
         return <FileText className="w-4 h-4" />;
       case "Impression":
         return <Printer className="w-4 h-4" />;
+      case "Photocopie":
+        return <Copy className="w-4 h-4" />;
+      case "Scannage & Plastification":
+        return <Scan className="w-4 h-4" />;
+      case "Services Photo":
+        return <Image className="w-4 h-4" />;
+      case "Conception & Impression":
+        return <Palette className="w-4 h-4" />;
       case "Technique":
         return <Cpu className="w-4 h-4" />;
       default:
@@ -164,94 +173,213 @@ export default function TarifsFormations({ onSelectTraining }: TarifsFormationsP
         {activeTab === "tarifs" && (
           <div className="space-y-8 max-w-4xl mx-auto">
             
-            {/* Search & Category Filter Header bar */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-between items-center bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
-              
-              {/* Search field */}
-              <div className="relative w-full sm:max-w-xs">
-                <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                <input
-                  type="text"
-                  placeholder="Rechercher une prestation..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 rounded-xl text-sm border border-slate-200 focus:outline-none focus:border-turquoise-500 focus:ring-2 focus:ring-turquoise-500/10"
-                />
-              </div>
-
-              {/* Category pill filters */}
-              <div className="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0 scrollbar-none">
-                <Filter className="w-4 h-4 text-slate-400 flex-shrink-0 hidden md:block" />
-                {categories.map((cat) => (
-                  <button
-                    key={cat}
-                    onClick={() => setSelectedCategory(cat)}
-                    className={`whitespace-nowrap px-3.5 py-1.5 rounded-full text-xs font-bold transition-all ${
-                      selectedCategory === cat
-                        ? "bg-marine-900 text-white shadow"
-                        : "bg-slate-50 text-slate-600 hover:bg-slate-100"
-                    }`}
-                  >
-                    {cat}
-                  </button>
-                ))}
-              </div>
-
+            {/* Sub-tab Switcher for general vs binding (reliure) */}
+            <div className="flex bg-slate-100 p-1.5 rounded-2xl w-full max-w-sm mx-auto shadow-inner border border-slate-200">
+              <button
+                onClick={() => setPrestationSubTab("general")}
+                className={`flex-1 py-2 text-xs font-extrabold uppercase tracking-wider rounded-xl transition-all ${
+                  prestationSubTab === "general"
+                    ? "bg-white text-marine-900 shadow-sm"
+                    : "text-slate-500 hover:text-slate-800"
+                }`}
+              >
+                Prestations Générales
+              </button>
+              <button
+                onClick={() => setPrestationSubTab("reliure")}
+                className={`flex-1 py-2 text-xs font-extrabold uppercase tracking-wider rounded-xl transition-all ${
+                  prestationSubTab === "reliure"
+                    ? "bg-white text-marine-900 shadow-sm"
+                    : "text-slate-500 hover:text-slate-800"
+                }`}
+              >
+                Tarifs de Reliures
+              </button>
             </div>
 
-            {/* Price Table list */}
-            <div className="bg-white rounded-3xl shadow-md border border-slate-100 overflow-hidden">
-              <div className="overflow-x-auto">
-                <table className="w-full text-left border-collapse">
-                  <thead>
-                    <tr className="bg-slate-50 border-b border-slate-100">
-                      <th className="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest w-[60%]">Désignation de la Prestation</th>
-                      <th className="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest hidden md:table-cell">Catégorie</th>
-                      <th className="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest text-right">Tarif National ALI</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {filteredPrestations.length > 0 ? (
-                      filteredPrestations.map((p, idx) => (
-                        <tr
-                          key={p.id}
-                          className={`border-b border-slate-100 hover:bg-slate-50/50 transition-colors ${
-                            idx % 2 === 0 ? "bg-white" : "bg-slate-50/20"
-                          }`}
-                        >
-                          <td className="px-6 py-4.5">
-                            <div className="flex items-center gap-3">
-                              <div className="p-2 rounded-lg bg-slate-50 text-slate-400 flex-shrink-0">
-                                {getCategoryIcon(p.category)}
-                              </div>
-                              <span className="font-semibold text-marine-900 text-sm sm:text-base leading-snug">
-                                {p.name}
-                              </span>
-                            </div>
-                          </td>
-                          <td className="px-6 py-4.5 hidden md:table-cell">
-                            <span className="text-xs font-bold text-slate-500 uppercase tracking-wider bg-slate-100 px-2.5 py-1 rounded-full">
-                              {p.category}
-                            </span>
-                          </td>
-                          <td className="px-6 py-4.5 text-right">
-                            <span className="font-extrabold text-[#D62828] text-sm sm:text-base whitespace-nowrap bg-[#D62828]/5 px-3 py-1 rounded-lg">
-                              {p.price}
-                            </span>
-                          </td>
+            {prestationSubTab === "general" ? (
+              <div className="space-y-8">
+                {/* Search & Category Filter Header bar */}
+                <div className="flex flex-col sm:flex-row gap-4 justify-between items-center bg-white p-4 rounded-2xl shadow-sm border border-slate-100 animate-fadeIn">
+                  
+                  {/* Search field */}
+                  <div className="relative w-full sm:max-w-xs">
+                    <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                    <input
+                      type="text"
+                      placeholder="Rechercher une prestation..."
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      className="w-full pl-10 pr-4 py-2 rounded-xl text-sm border border-slate-200 focus:outline-none focus:border-turquoise-500 focus:ring-2 focus:ring-turquoise-500/10"
+                    />
+                  </div>
+
+                  {/* Category pill filters */}
+                  <div className="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0 scrollbar-none">
+                    <Filter className="w-4 h-4 text-slate-400 flex-shrink-0 hidden md:block" />
+                    {categories.map((cat) => (
+                      <button
+                        key={cat}
+                        onClick={() => setSelectedCategory(cat)}
+                        className={`whitespace-nowrap px-3.5 py-1.5 rounded-full text-xs font-bold transition-all ${
+                          selectedCategory === cat
+                            ? "bg-marine-900 text-white shadow"
+                            : "bg-slate-50 text-slate-600 hover:bg-slate-100"
+                        }`}
+                      >
+                        {cat}
+                      </button>
+                    ))}
+                  </div>
+
+                </div>
+
+                {/* Price Table list */}
+                <div className="bg-white rounded-3xl shadow-md border border-slate-100 overflow-hidden animate-fadeIn">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left border-collapse">
+                      <thead>
+                        <tr className="bg-slate-50 border-b border-slate-100">
+                          <th className="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest w-[60%]">Désignation de la Prestation</th>
+                          <th className="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest hidden md:table-cell">Catégorie</th>
+                          <th className="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest text-right">Tarif National ALI</th>
                         </tr>
-                      ))
-                    ) : (
-                      <tr>
-                        <td colSpan={3} className="px-6 py-12 text-center text-slate-400 font-light">
-                          Aucune prestation ne correspond à votre recherche.
-                        </td>
-                      </tr>
-                    )}
-                  </tbody>
-                </table>
+                      </thead>
+                      <tbody>
+                        {filteredPrestations.length > 0 ? (
+                          filteredPrestations.map((p, idx) => (
+                            <tr
+                              key={p.id}
+                              className={`border-b border-slate-100 hover:bg-slate-50/50 transition-colors ${
+                                idx % 2 === 0 ? "bg-white" : "bg-slate-50/20"
+                              }`}
+                            >
+                              <td className="px-6 py-4.5">
+                                <div className="flex items-start gap-3">
+                                  <div className="p-2 rounded-lg bg-slate-50 text-slate-400 flex-shrink-0 mt-0.5 animate-pulse">
+                                    {getCategoryIcon(p.category)}
+                                  </div>
+                                  <div>
+                                    <span className="font-semibold text-marine-900 text-sm sm:text-base leading-snug block">
+                                      {p.name}
+                                    </span>
+                                    {p.note && (
+                                      <span className="inline-block mt-1 text-[11px] font-semibold text-[#D62828] bg-[#D62828]/5 px-2 py-0.5 rounded border border-[#D62828]/10">
+                                        {p.note}
+                                      </span>
+                                    )}
+                                  </div>
+                                </div>
+                              </td>
+                              <td className="px-6 py-4.5 hidden md:table-cell">
+                                <span className="text-xs font-bold text-slate-500 uppercase tracking-wider bg-slate-100 px-2.5 py-1 rounded-full">
+                                  {p.category}
+                                </span>
+                              </td>
+                              <td className="px-6 py-4.5 text-right">
+                                <span className="font-extrabold text-[#D62828] text-sm sm:text-base whitespace-nowrap bg-[#D62828]/5 px-3 py-1 rounded-lg">
+                                  {p.price}
+                                </span>
+                              </td>
+                            </tr>
+                          ))
+                        ) : (
+                          <tr>
+                            <td colSpan={3} className="px-6 py-12 text-center text-slate-400 font-light">
+                              Aucune prestation ne correspond à votre recherche.
+                            </td>
+                          </tr>
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
-            </div>
+            ) : (
+              <div className="space-y-6 animate-fadeIn">
+                {/* Explanatory cards */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="p-5 rounded-2xl bg-white border border-slate-100 shadow-sm flex gap-3">
+                    <div className="p-2 bg-[#D62828]/10 text-[#D62828] rounded-xl h-fit">
+                      <Layers className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-marine-900 text-sm">Reliure Serodo</h4>
+                      <p className="text-xs text-slate-500 font-light mt-1 leading-relaxed">
+                        Système de reliure simple, rapide et amovible utilisant une baguette en plastique rigide qui se glisse le long de la tranche du document sans perforation.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="p-5 rounded-2xl bg-white border border-slate-100 shadow-sm flex gap-3">
+                    <div className="p-2 bg-turquoise-500/10 text-turquoise-600 rounded-xl h-fit">
+                      <Activity className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-marine-900 text-sm">Reliure Anneaux</h4>
+                      <p className="text-xs text-slate-500 font-light mt-1 leading-relaxed">
+                        Reliure spirale classique solide nécessitant la perforation préalable des feuilles. Permet d'ouvrir le document à 360° pour une consultation aisée.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Reliure Prices Table */}
+                <div className="bg-white rounded-3xl shadow-md border border-slate-100 overflow-hidden">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left border-collapse">
+                      <thead>
+                        <tr className="bg-slate-50 border-b border-slate-100">
+                          <th className="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest w-[30%]">Nombre de Pages</th>
+                          <th className="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest">Reliure Serodo</th>
+                          <th className="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest">Reliure Anneaux</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {ALI_CONFIG.reliures.map((r, idx) => (
+                          <tr
+                            key={idx}
+                            className={`border-b border-slate-100 hover:bg-slate-50/50 transition-colors ${
+                              idx % 2 === 0 ? "bg-white" : "bg-slate-50/20"
+                            }`}
+                          >
+                            <td className="px-6 py-4.5">
+                              <div className="flex items-center gap-3">
+                                <div className="p-2 rounded-lg bg-slate-50 text-slate-400 flex-shrink-0">
+                                  <BookOpen className="w-4 h-4 text-slate-400" />
+                                </div>
+                                <span className="font-bold text-marine-900 text-sm sm:text-base whitespace-nowrap">
+                                  {r.pages} pages
+                                </span>
+                              </div>
+                            </td>
+                            <td className="px-6 py-4.5">
+                              <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
+                                <span className="font-extrabold text-[#D62828] text-sm sm:text-base">
+                                  {r.serodoPrice}
+                                </span>
+                                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider bg-slate-100 px-2 py-0.5 rounded w-fit">
+                                  Code: {r.serodoCode}
+                                </span>
+                              </div>
+                            </td>
+                            <td className="px-6 py-4.5">
+                              <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
+                                <span className="font-extrabold text-turquoise-600 text-sm sm:text-base">
+                                  {r.anneauxPrice}
+                                </span>
+                                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider bg-slate-100 px-2 py-0.5 rounded w-fit">
+                                  Code: {r.anneauxCode}
+                                </span>
+                              </div>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Pricing Disclaimer */}
             <div className="p-4.5 rounded-2xl bg-slate-100 text-center text-xs text-slate-500 border border-slate-200">

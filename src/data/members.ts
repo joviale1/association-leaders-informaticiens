@@ -39,7 +39,7 @@ export const MEMBERS_DATA: Member[] = [
   },
   {
     id: "b4",
-    name: "OROULA Benoît",
+    name: "OROUNLA Benoît",
     role: "Secrétaire Général Adjoint",
     center: "Ets OBA TECH Bénin",
     city: "Calavi",

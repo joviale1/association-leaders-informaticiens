@@ -235,6 +235,8 @@ Merci de confirmer mon inscription.`;
                       <option value="OPS">OPS</option>
                       <option value="Graphisme">Graphisme</option>
                       <option value="Maintenance">Maintenance</option>
+                      <option value="Mécanographie">Mécanographie</option>
+                      <option value="Secrétariat Informatique">Secrétariat Informatique</option>
                     </select>
                     {errors.specialty && <p className="text-xs font-bold text-[#D62828]">{errors.specialty}</p>}
                   </div>

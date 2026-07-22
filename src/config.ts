@@ -16,6 +16,15 @@ export interface PrestationPrice {
   name: string;
   price: string;
   category: string;
+  note?: string; // Optional helper text e.g. "10 F à partir de 100 copies"
+}
+
+export interface ReliureTarif {
+  pages: string;
+  serodoPrice: string;
+  serodoCode: string;
+  anneauxPrice: string;
+  anneauxCode: string;
 }
 
 export interface TrainingModule {
@@ -81,7 +90,7 @@ export const ALI_CONFIG = {
     {
       id: "sga",
       role: "Secrétaire Général Adjoint",
-      name: "OROULA Benoît",
+      name: "OROUNLA Benoît",
       isCompleted: true,
     },
     {
@@ -130,19 +139,45 @@ export const ALI_CONFIG = {
 
   // Grille Tarifaire des prestations (PTA - Standard Bénin)
   prestations: [
-    { id: "p1", name: "Saisie de texte simple (la page)", price: "200 F", category: "Bureautique" },
-    { id: "p2", name: "Saisie complexe avec tableaux / formules (la page)", price: "400 F", category: "Bureautique" },
-    { id: "p3", name: "Impression A4 Noir & Blanc (la page)", price: "100 F", category: "Impression" },
-    { id: "p4", name: "Impression A4 Couleur (la page)", price: "200 F", category: "Impression" },
-    { id: "p5", name: "Photocopie A4 Noir & Blanc (la page)", price: "25 F", category: "Impression" },
-    { id: "p6", name: "Photocopie A4 Couleur (la page)", price: "150 F", category: "Impression" },
-    { id: "p7", name: "Reliure simple (1 à 50 feuilles)", price: "300 F", category: "Reliure & Finition" },
-    { id: "p8", name: "Reliure simple (51 à 100 feuilles)", price: "500 F", category: "Reliure & Finition" },
-    { id: "p9", name: "Plastification format A4", price: "500 F", category: "Reliure & Finition" },
-    { id: "p10", name: "Numérisation de document / Scan (la page)", price: "100 F", category: "Bureautique" },
-    { id: "p11", name: "Maintenance & Dépannage matériel informatique", price: "À partir de 3 000 F", category: "Technique" },
-    { id: "p12", name: "Installation de système d'exploitation & logiciels", price: "5 000 F", category: "Technique" },
+    { id: "p1", name: "Saisie A4 + Impression blanc noir", price: "300 F", category: "Saisie & Impression" },
+    { id: "p2", name: "Saisie A4 + Impression couleur", price: "400 F", category: "Saisie & Impression" },
+    { id: "p3", name: "Saisie A3 + Impression blanc noir", price: "500 F", category: "Saisie & Impression" },
+    { id: "p4", name: "Saisie A3 + Impression couleur", price: "700 F", category: "Saisie & Impression" },
+    { id: "p5", name: "Impression blanc noir A4", price: "50 F", category: "Impression" },
+    { id: "p6", name: "Impression blanc noir A3", price: "100 F", category: "Impression" },
+    { id: "p7", name: "Impression couleur A4", price: "100 F", category: "Impression" },
+    { id: "p8", name: "Impression couleur A3", price: "250 F", category: "Impression" },
+    { id: "p9", name: "Photocopie blanc noir A4", price: "15 F", category: "Photocopie", note: "10 F à partir de 100 copies" },
+    { id: "p10", name: "Photocopie Blanc Noir A3", price: "75 F", category: "Photocopie" },
+    { id: "p11", name: "Photocopie Couleur A3", price: "200 F", category: "Photocopie" },
+    { id: "p12", name: "Photocopie Couleur A4", price: "100 F", category: "Photocopie" },
+    { id: "p13", name: "Scannage A4", price: "150 F", category: "Scannage & Plastification" },
+    { id: "p14", name: "Impression couleur + Plastification CIP PF", price: "700 F", category: "Scannage & Plastification" },
+    { id: "p15", name: "Impression couleur + Plastification CIP GF", price: "800 F", category: "Scannage & Plastification" },
+    { id: "p16", name: "Impression couleur + Plastification A4", price: "1 500 F", category: "Scannage & Plastification" },
+    { id: "p17", name: "Frappe document A4 recto verso (dactylographie)", price: "500 F", category: "Saisie & Impression", note: "500 F la page recto-verso" },
+    { id: "p18", name: "Photo d’identité (8 copies)", price: "1 000 F", category: "Services Photo" },
+    { id: "p19", name: "Conception et impression bâche", price: "8 000 F / m²", category: "Conception & Impression" },
+    { id: "p20", name: "Conception et impression autocollant", price: "10 000 F / m²", category: "Conception & Impression" },
+    { id: "p21", name: "Réalisation de carte d’invitation (version numérique)", price: "5 000 F", category: "Conception & Impression" },
+    { id: "p22", name: "Réalisation et impression de carte d’invitation", price: "100 F à 200 F / unité", category: "Conception & Impression", note: "100 F, 150 F ou 200 F l'unité selon le format" },
+    { id: "p23", name: "Maintenance & Dépannage matériel informatique", price: "À partir de 3 000 F", category: "Technique" },
+    { id: "p24", name: "Installation de système d'exploitation & logiciels", price: "5 000 F", category: "Technique" },
   ] as PrestationPrice[],
+
+  // Grille Tarifaire des Reliures
+  reliures: [
+    { pages: "1-20", serodoPrice: "300 FCFA", serodoCode: "1-2", anneauxPrice: "350 FCFA", anneauxCode: "1" },
+    { pages: "20-40", serodoPrice: "350 FCFA", serodoCode: "3", anneauxPrice: "400 FCFA", anneauxCode: "2" },
+    { pages: "40-60", serodoPrice: "400 FCFA", serodoCode: "4", anneauxPrice: "450 FCFA", anneauxCode: "3" },
+    { pages: "60-80", serodoPrice: "450 FCFA", serodoCode: "5", anneauxPrice: "500 FCFA", anneauxCode: "4" },
+    { pages: "80-100", serodoPrice: "500 FCFA", serodoCode: "6", anneauxPrice: "550 FCFA", anneauxCode: "5" },
+    { pages: "100-130", serodoPrice: "650 FCFA", serodoCode: "7", anneauxPrice: "700 FCFA", anneauxCode: "6" },
+    { pages: "131-160", serodoPrice: "750 FCFA", serodoCode: "8", anneauxPrice: "800 FCFA", anneauxCode: "7" },
+    { pages: "161-200", serodoPrice: "1 200 FCFA", serodoCode: "9", anneauxPrice: "1 250 FCFA", anneauxCode: "8" },
+    { pages: "201-259", serodoPrice: "1 500 FCFA", serodoCode: "10", anneauxPrice: "1 550 FCFA", anneauxCode: "9" },
+    { pages: "259-320", serodoPrice: "2 000 FCFA", serodoCode: "11", anneauxPrice: "2 050 FCFA", anneauxCode: "10" },
+  ] as ReliureTarif[],
 
   // Modules de formation de l'ALI
   formations: [
