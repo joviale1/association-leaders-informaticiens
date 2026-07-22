@@ -106,7 +106,7 @@ Merci de confirmer mon inscription.`;
       <div className="absolute top-0 left-0 w-64 h-64 bg-turquoise-500/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-72 h-72 bg-[#D62828]/5 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
         <div className="text-center space-y-4 mb-16">
@@ -118,12 +118,58 @@ Merci de confirmer mon inscription.`;
             Devenir Membre / S'inscrire
           </h2>
           <p className="text-sm sm:text-base text-slate-500 max-w-xl mx-auto font-light">
-            Remplissez ce formulaire en quelques secondes pour rejoindre l'ALI ou vous inscrire à un module de formation. Vos données seront directement transmises à notre secrétariat.
+            Découvrez les conditions d'adhésion à l'association et inscrivez-vous en ligne en quelques secondes pour rejoindre l'ALI.
           </p>
         </div>
 
-        {/* Form Container with interactive animations */}
-        <div className="bg-[#f8fafc] rounded-3xl p-6 sm:p-10 border border-slate-100 shadow-xl max-w-2xl mx-auto text-left">
+        {/* Content Layout Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          {/* Conditions & Fees Block */}
+          <div className="lg:col-span-5 bg-[#f8fafc] rounded-3xl p-6 sm:p-8 border border-slate-100 shadow-xl space-y-6 text-left">
+            <div>
+              <h3 className="text-lg font-black text-marine-900 tracking-tight flex items-center gap-2 mb-3">
+                <span className="w-1.5 h-5 bg-turquoise-500 rounded-full" />
+                Conditions d'adhésion
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed italic font-light bg-white p-4 rounded-2xl border border-slate-100 relative">
+                "L'ALI est ouverte à toute personne physique ou morale, tous les acteurs du domaine informatique, sans distinction d'âge, de nationalité, de religion, de sexe ou d'appartenance politique, qui manifeste son désir et adhère aux dispositions des présents Statuts."
+                <span className="block mt-2 text-right text-xs font-bold text-turquoise-600 not-italic">— Article 8 des statuts</span>
+              </p>
+            </div>
+
+            <div className="space-y-4">
+              <h3 className="text-lg font-black text-marine-900 tracking-tight flex items-center gap-2">
+                <span className="w-1.5 h-5 bg-[#D62828] rounded-full" />
+                Frais d'adhésion
+              </h3>
+              <div className="bg-white rounded-2xl border border-slate-100 overflow-hidden divide-y divide-slate-100">
+                <div className="p-4 flex justify-between text-xs sm:text-sm">
+                  <span className="text-slate-500">Frais d'adhésion</span>
+                  <span className="font-extrabold text-marine-900">1 000 FCFA</span>
+                </div>
+                <div className="p-4 flex justify-between text-xs sm:text-sm">
+                  <span className="text-slate-500">Carte de membre</span>
+                  <span className="font-extrabold text-marine-900">1 000 FCFA</span>
+                </div>
+                <div className="p-4 flex justify-between text-xs sm:text-sm">
+                  <span className="text-slate-500">Participation à l'enregistrement</span>
+                  <span className="font-extrabold text-marine-900">3 000 FCFA</span>
+                </div>
+                <div className="p-4 flex justify-between text-xs sm:text-sm">
+                  <span className="text-slate-500">Participation à la déclaration au J.O.</span>
+                  <span className="font-extrabold text-marine-900">1 000 FCFA</span>
+                </div>
+                <div className="p-4 bg-marine-50 flex justify-between text-xs sm:text-sm font-black border-t-2 border-marine-100">
+                  <span className="text-marine-950 font-extrabold">Total à payer</span>
+                  <span className="text-[#D62828] text-sm sm:text-base font-black">6 000 FCFA</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Form Container with interactive animations */}
+          <div className="lg:col-span-7 bg-[#f8fafc] rounded-3xl p-6 sm:p-10 border border-slate-100 shadow-xl text-left">
           
           <AnimatePresence mode="wait">
             {!isSubmitted ? (
@@ -367,6 +413,7 @@ Merci de confirmer mon inscription.`;
         </div>
 
       </div>
-    </section>
+    </div>
+  </section>
   );
 }
