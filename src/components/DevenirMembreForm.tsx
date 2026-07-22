@@ -20,6 +20,7 @@ export default function DevenirMembreForm({ prefilledInterest }: FormProps) {
   const [whatsappRecipient, setWhatsappRecipient] = useState<"president" | "sg">("president");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [generatedLink, setGeneratedLink] = useState("");
 
   // Sync prefilled interest from parent
   useEffect(() => {
@@ -57,8 +58,8 @@ export default function DevenirMembreForm({ prefilledInterest }: FormProps) {
     e.preventDefault();
     const validationErrors = validateForm();
     if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      return;
+       setErrors(validationErrors);
+       return;
     }
 
     setErrors({});
@@ -78,21 +79,24 @@ Je souhaite m'inscrire ou devenir membre de l'association. Voici mes information
 Merci de confirmer mon inscription.`;
 
     // Construct Redirect URLs
+    let redirectUrl = "";
     if (submitMethod === "whatsapp") {
       const recipientNumber = whatsappRecipient === "president" ? "2290197293668" : "2290166112114";
       // Encode for WhatsApp API
-      const whatsappUrl = `https://wa.me/${recipientNumber}?text=${encodeURIComponent(message)}`;
-      setTimeout(() => {
-        window.open(whatsappUrl, "_blank");
-      }, 1500);
+      redirectUrl = `https://wa.me/${recipientNumber}?text=${encodeURIComponent(message)}`;
+      setGeneratedLink(redirectUrl);
+      try {
+        window.open(redirectUrl, "_blank");
+      } catch (err) {
+        console.error("Popup bloqué:", err);
+      }
     } else {
       // Encode for Mailto client
-      const mailtoUrl = `mailto:${ALI_CONFIG.contact.email}?subject=${encodeURIComponent(
+      redirectUrl = `mailto:${ALI_CONFIG.contact.email}?subject=${encodeURIComponent(
         `Inscription ALI - ${formData.name}`
       )}&body=${encodeURIComponent(message)}`;
-      setTimeout(() => {
-        window.location.href = mailtoUrl;
-      }, 1500);
+      setGeneratedLink(redirectUrl);
+      window.location.href = redirectUrl;
     }
   };
 
@@ -325,8 +329,29 @@ Merci de confirmer mon inscription.`;
                   Merci, <span className="font-bold text-marine-950">{formData.name}</span>. Votre formulaire a été généré avec succès. Nous vous redirigeons vers votre client <span className="font-bold text-turquoise-500">{submitMethod === "whatsapp" ? "WhatsApp" : "Email"}</span> pour finaliser l'envoi.
                 </p>
 
+                {generatedLink && (
+                  <a
+                    href={generatedLink}
+                    target={submitMethod === "whatsapp" ? "_blank" : "_self"}
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-turquoise-500 hover:bg-turquoise-600 text-marine-950 font-extrabold uppercase tracking-wider px-6 py-3.5 rounded-2xl shadow-lg shadow-turquoise-500/20 transition-all duration-300 hover:scale-105"
+                  >
+                    {submitMethod === "whatsapp" ? (
+                      <>
+                        <MessageSquare className="w-5 h-5" />
+                        <span>Ouvrir WhatsApp</span>
+                      </>
+                    ) : (
+                      <>
+                        <Mail className="w-5 h-5" />
+                        <span>Ouvrir ma Messagerie</span>
+                      </>
+                    )}
+                  </a>
+                )}
+
                 <div className="p-3.5 rounded-xl bg-slate-100 text-[11px] text-slate-500 italic max-w-sm">
-                  "Si la redirection ne s'exécute pas, veuillez vérifier que vos bloqueurs de popups sont désactivés."
+                  "Si la redirection automatique ne s'exécute pas, veuillez cliquer sur le bouton ci-dessus."
                 </div>
 
                 <button

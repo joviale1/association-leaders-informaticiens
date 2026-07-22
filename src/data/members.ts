@@ -48,7 +48,7 @@ export const MEMBERS_DATA: Member[] = [
   },
   {
     id: "b5",
-    name: "SEMEVO Déo-Gratias",
+    name: "SEMEVO DÉO-GRACIA",
     role: "Trésorière Générale",
     center: "ETS Service Emmanuella & Fils",
     city: "Agassagodomey",

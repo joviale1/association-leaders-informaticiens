@@ -87,7 +87,7 @@ export const ALI_CONFIG = {
     {
       id: "tg",
       role: "Trésorière Générale",
-      name: "SEMEVO Déo-Gratias",
+      name: "SEMEVO DÉO-GRACIA",
       isCompleted: true,
     },
     {
