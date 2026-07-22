@@ -192,7 +192,7 @@ export const ALI_CONFIG = {
       price: "15 000 F / logiciel",
       details: "Une formation intensive d'un mois pour maîtriser les outils essentiels de la création graphique. Idéal pour les débutants et les personnes souhaitant se professionnaliser.",
       icon: "Palette",
-      whatsappLink: "https://wa.me/22997000000?text=Bonjour%20je%20souhaite%20m'inscrire%20à%20la%20Formation%20Graphisme",
+      whatsappLink: "https://wa.me/2290197293668?text=Bonjour%20je%20souhaite%20m'inscrire%20à%20la%20Formation%20Graphisme",
     },
     {
       id: "ev2",
@@ -201,7 +201,7 @@ export const ALI_CONFIG = {
       price: "6 000 F (Solo) / 10 000 F (Couple)",
       details: "La grande rencontre annuelle d'intégration et de réseautage de l'ALI. Le tarif inclut : Tee-shirt + Casquette de l'association + un somptueux déjeuner.",
       icon: "PartyPopper",
-      whatsappLink: "https://wa.me/22997000000?text=Bonjour%20je%20souhaite%20réserver%20ma%20place%20pour%20la%20Sortie%20Officielle%20de%20l'ALI",
+      whatsappLink: "https://wa.me/2290197293668?text=Bonjour%20je%20souhaite%20réserver%20ma%20place%20pour%20la%20Sortie%20Officielle%20de%20l'ALI",
     }
   ] as AliEvent[],
 };

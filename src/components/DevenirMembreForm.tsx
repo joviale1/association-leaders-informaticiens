@@ -17,6 +17,7 @@ export default function DevenirMembreForm({ prefilledInterest }: FormProps) {
   });
 
   const [submitMethod, setSubmitMethod] = useState<"whatsapp" | "email">("whatsapp");
+  const [whatsappRecipient, setWhatsappRecipient] = useState<"president" | "sg">("president");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -47,7 +48,7 @@ export default function DevenirMembreForm({ prefilledInterest }: FormProps) {
     } else if (!/^[+0-9\s-]{8,15}$/.test(formData.phone.trim())) {
       newErrors.phone = "Numéro invalide (ex: +229 97 00 00 00 ou 97000000)";
     }
-    if (!formData.specialty.trim()) newErrors.specialty = "Veuillez préciser votre spécialité / domaine d'activité";
+    if (!formData.specialty.trim()) newErrors.specialty = "Veuillez sélectionner votre catégorie";
     if (!formData.city.trim()) newErrors.city = "La ville de résidence est requise";
     return newErrors;
   };
@@ -63,8 +64,9 @@ export default function DevenirMembreForm({ prefilledInterest }: FormProps) {
     setErrors({});
     setIsSubmitted(true);
 
+    const salutation = whatsappRecipient === "president" ? "Président" : "Secrétaire Général";
     // Formatted message content in French
-    const message = `Bonjour Secrétaire de l'ALI Bénin,
+    const message = `Bonjour ${salutation} de l'ALI Bénin,
 
 Je souhaite m'inscrire ou devenir membre de l'association. Voici mes informations :
 - Nom & Prénom : ${formData.name}
@@ -77,8 +79,9 @@ Merci de confirmer mon inscription.`;
 
     // Construct Redirect URLs
     if (submitMethod === "whatsapp") {
+      const recipientNumber = whatsappRecipient === "president" ? "2290197293668" : "2290166112114";
       // Encode for WhatsApp API
-      const whatsappUrl = `https://wa.me/22997000000?text=${encodeURIComponent(message)}`;
+      const whatsappUrl = `https://wa.me/${recipientNumber}?text=${encodeURIComponent(message)}`;
       setTimeout(() => {
         window.open(whatsappUrl, "_blank");
       }, 1500);
@@ -169,17 +172,20 @@ Merci de confirmer mon inscription.`;
                   <div className="space-y-1.5">
                     <label className="text-xs font-extrabold uppercase tracking-widest text-slate-500 flex items-center gap-1.5">
                       <Briefcase className="w-4 h-4 text-turquoise-500" />
-                      Spécialité / Métier
+                      Catégorie / Spécialité
                     </label>
-                    <input
-                      type="text"
+                    <select
                       value={formData.specialty}
                       onChange={(e) => setFormData({ ...formData, specialty: e.target.value })}
-                      placeholder="Ex: Étudiant / Graphiste / Dépanneur"
                       className={`w-full bg-white px-4 py-3 rounded-xl text-sm sm:text-base border ${
                         errors.specialty ? "border-[#D62828] focus:ring-1 focus:ring-[#D62828]" : "border-slate-200 focus:border-turquoise-500"
-                      } focus:outline-none focus:ring-2 focus:ring-turquoise-500/10 transition-all`}
-                    />
+                      } focus:outline-none focus:ring-2 focus:ring-turquoise-500/10 transition-all cursor-pointer`}
+                    >
+                      <option value="">Sélectionnez votre catégorie</option>
+                      <option value="OPS">OPS</option>
+                      <option value="Graphisme">Graphisme</option>
+                      <option value="Maintenance">Maintenance</option>
+                    </select>
                     {errors.specialty && <p className="text-xs font-bold text-[#D62828]">{errors.specialty}</p>}
                   </div>
 
@@ -254,6 +260,41 @@ Merci de confirmer mon inscription.`;
                     </button>
                   </div>
                 </div>
+
+                {submitMethod === "whatsapp" && (
+                  <div className="space-y-2 animate-fadeIn pt-1">
+                    <label className="text-xs font-extrabold uppercase tracking-widest text-slate-500 flex items-center gap-1.5">
+                      <MessageSquare className="w-4 h-4 text-turquoise-500" />
+                      Destinataire WhatsApp
+                    </label>
+                    <div className="grid grid-cols-2 gap-3">
+                      <button
+                        type="button"
+                        onClick={() => setWhatsappRecipient("president")}
+                        className={`p-3.5 rounded-2xl border text-xs sm:text-sm font-semibold transition-all text-center flex flex-col items-center justify-center cursor-pointer ${
+                          whatsappRecipient === "president"
+                            ? "bg-turquoise-500/10 border-turquoise-500 text-turquoise-600 font-bold"
+                            : "bg-white border-slate-200 text-slate-500 hover:bg-slate-50"
+                        }`}
+                      >
+                        <span className="font-extrabold">Président</span>
+                        <span className="text-[10px] opacity-75 font-mono mt-0.5">01 97 29 36 68</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setWhatsappRecipient("sg")}
+                        className={`p-3.5 rounded-2xl border text-xs sm:text-sm font-semibold transition-all text-center flex flex-col items-center justify-center cursor-pointer ${
+                          whatsappRecipient === "sg"
+                            ? "bg-turquoise-500/10 border-turquoise-500 text-turquoise-600 font-bold"
+                            : "bg-white border-slate-200 text-slate-500 hover:bg-slate-50"
+                        }`}
+                      >
+                        <span className="font-extrabold">Secrétaire Général</span>
+                        <span className="text-[10px] opacity-75 font-mono mt-0.5">01 66 11 21 14</span>
+                      </button>
+                    </div>
+                  </div>
+                )}
 
                 {/* Send Button */}
                 <button
