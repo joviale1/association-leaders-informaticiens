@@ -16,7 +16,7 @@ export const MEMBERS_DATA: Member[] = [
     role: "Président",
     center: "ETS EBENEZER TECHNO SERVICES",
     city: "Calavi",
-    phone: "01 97 29 36 68",
+    phone: "01 44 67 31 46",
     isBureau: true,
   },
   {

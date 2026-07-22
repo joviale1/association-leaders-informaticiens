@@ -39,11 +39,11 @@ export interface AliEvent {
 export const ALI_CONFIG = {
   // Coordonnées de l'association
   contact: {
-    phone1: "01 97 29 36 68", // Président (AGOSSOU Patrice)
+    phone1: "01 44 67 31 46", // Président (AGOSSOU Patrice)
     phone2: "01 66 11 21 14", // Secrétaire Général (ZOSSOUNGBO A. Fidèle)
-    presidentPhone: "01 97 29 36 68",
+    presidentPhone: "01 44 67 31 46",
     sgPhone: "01 66 11 21 14",
-    whatsapp: "01 97 29 36 68", // WhatsApp
+    whatsapp: "01 44 67 31 46", // WhatsApp
     email: "leadersinformaticiens@gmail.com",
     address: "Agamandin, Abomey-Calavi, Bénin",
     apolitiqueInfo: "Association à caractère apolitique et à but non lucratif",
@@ -192,7 +192,7 @@ export const ALI_CONFIG = {
       price: "15 000 F / logiciel",
       details: "Une formation intensive d'un mois pour maîtriser les outils essentiels de la création graphique. Idéal pour les débutants et les personnes souhaitant se professionnaliser.",
       icon: "Palette",
-      whatsappLink: "https://wa.me/2290197293668?text=Bonjour%20je%20souhaite%20m'inscrire%20à%20la%20Formation%20Graphisme",
+      whatsappLink: "https://wa.me/2290144673146?text=Bonjour%20je%20souhaite%20m'inscrire%20à%20la%20Formation%20Graphisme",
     },
     {
       id: "ev2",
@@ -201,7 +201,7 @@ export const ALI_CONFIG = {
       price: "6 000 F (Solo) / 10 000 F (Couple)",
       details: "La grande rencontre annuelle d'intégration et de réseautage de l'ALI. Le tarif inclut : Tee-shirt + Casquette de l'association + un somptueux déjeuner.",
       icon: "PartyPopper",
-      whatsappLink: "https://wa.me/2290197293668?text=Bonjour%20je%20souhaite%20réserver%20ma%20place%20pour%20la%20Sortie%20Officielle%20de%20l'ALI",
+      whatsappLink: "https://wa.me/2290144673146?text=Bonjour%20je%20souhaite%20réserver%20ma%20place%20pour%20la%20Sortie%20Officielle%20de%20l'ALI",
     }
   ] as AliEvent[],
 };

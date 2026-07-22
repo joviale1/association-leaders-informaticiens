@@ -81,7 +81,7 @@ Merci de confirmer mon inscription.`;
     // Construct Redirect URLs
     let redirectUrl = "";
     if (submitMethod === "whatsapp") {
-      const recipientNumber = whatsappRecipient === "president" ? "2290197293668" : "2290166112114";
+      const recipientNumber = whatsappRecipient === "president" ? "2290144673146" : "2290166112114";
       // Encode for WhatsApp API
       redirectUrl = `https://wa.me/${recipientNumber}?text=${encodeURIComponent(message)}`;
       setGeneratedLink(redirectUrl);
@@ -282,7 +282,7 @@ Merci de confirmer mon inscription.`;
                         }`}
                       >
                         <span className="font-extrabold">Président</span>
-                        <span className="text-[10px] opacity-75 font-mono mt-0.5">01 97 29 36 68</span>
+                        <span className="text-[10px] opacity-75 font-mono mt-0.5">01 44 67 31 46</span>
                       </button>
                       <button
                         type="button"
