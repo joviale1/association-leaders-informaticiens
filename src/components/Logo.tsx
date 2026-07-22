@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import logoImg from "../assets/logo.jpg";
 
 export default function Logo({ className = "w-12 h-12" }: { className?: string }) {
   const [imgError, setImgError] = useState(false);
@@ -7,10 +8,9 @@ export default function Logo({ className = "w-12 h-12" }: { className?: string }
     <div className={`relative flex items-center justify-center select-none ${className}`} id="ali-logo-container">
       {!imgError ? (
         <img
-          src="/logo.jpg"
+          src={logoImg}
           alt="ALI Bénin Logo"
           onError={() => setImgError(true)}
-          referrerPolicy="no-referrer"
           className="w-full h-full object-cover rounded-full shadow-md border border-turquoise-500/80 transition-all duration-300 hover:scale-105"
         />
       ) : (
