@@ -101,6 +101,13 @@ export default function Footer({ onNavigate }: FooterProps) {
                     {ALI_CONFIG.contact.phone2}
                   </a>
                 </div>
+                <div>
+                  <span className="font-semibold text-white/90">Trésorière Générale (SD) : </span>
+                  <span className="text-white/80 font-medium">{ALI_CONFIG.contact.treasurerName}</span>{" "}
+                  <a href={`tel:${ALI_CONFIG.contact.treasurerPhone.replace(/\s+/g, '')}`} className="hover:text-turquoise-500 transition-colors font-mono">
+                    ({ALI_CONFIG.contact.treasurerPhone})
+                  </a>
+                </div>
               </div>
             </div>
 

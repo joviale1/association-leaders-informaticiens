@@ -11,24 +11,53 @@
     <link rel="icon" type="image/jpeg" href="/logo.jpg" />
     <link rel="shortcut icon" type="image/jpeg" href="/logo.jpg" />
     <link rel="apple-touch-icon" href="/logo.jpg" />
+    <link rel="image_src" href="https://ali-benin.vercel.app/logo.jpg" />
 
-    <!-- Open Graph / Meta pour réseaux sociaux (WhatsApp, Facebook, Messenger, LinkedIn) -->
+    <!-- Schema.org / Google / WhatsApp -->
+    <meta itemprop="name" content="ALI — Association des Leaders Informaticiens" />
+    <meta itemprop="description" content="Ensemble, on est plus fort ! Découvrez l'annuaire, les formations et les événements de l'ALI Bénin." />
+    <meta itemprop="image" content="https://ali-benin.vercel.app/logo.jpg" />
+
+    <!-- Open Graph / Facebook / WhatsApp Vignette -->
     <meta property="og:site_name" content="ALI Bénin" />
     <meta property="og:title" content="ALI — Association des Leaders Informaticiens" />
     <meta property="og:description" content="Ensemble, on est plus fort ! Découvrez l'annuaire, les formations et les événements de l'ALI Bénin." />
-    <meta property="og:image" content="/og-image.jpg" />
-    <meta property="og:image:secure_url" content="/og-image.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ali-benin.vercel.app/" />
+
+    <!-- Primary OG Image (Logo Square / Vignette) -->
+    <meta property="og:image" content="https://ali-benin.vercel.app/logo.jpg" />
+    <meta property="og:image:secure_url" content="https://ali-benin.vercel.app/logo.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="400" />
+    <meta property="og:image:height" content="400" />
+    <meta property="og:image:alt" content="Logo Association des Leaders Informaticiens Bénin" />
+
+    <!-- Secondary OG Image (Banner 1200x630) -->
+    <meta property="og:image" content="https://ali-benin.vercel.app/og-image.jpg" />
+    <meta property="og:image:secure_url" content="https://ali-benin.vercel.app/og-image.jpg" />
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:url" content="/" />
-    <meta property="og:type" content="website" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="ALI — Association des Leaders Informaticiens" />
     <meta name="twitter:description" content="Ensemble, on est plus fort ! Découvrez l'annuaire, les formations et les événements de l'ALI Bénin." />
-    <meta name="twitter:image" content="/og-image.jpg" />
+    <meta name="twitter:image" content="https://ali-benin.vercel.app/og-image.jpg" />
+
+    <!-- Script to dynamically adapt OG URLs to current origin if hosted elsewhere -->
+    <script>
+      (function() {
+        if (typeof window !== 'undefined' && window.location && window.location.origin) {
+          var origin = window.location.origin;
+          if (!origin.includes('localhost') && !origin.includes('127.0.0.1')) {
+            var ogUrl = document.querySelector('meta[property="og:url"]');
+            if (ogUrl) ogUrl.setAttribute('content', origin + '/');
+          }
+        }
+      })();
+    </script>
 
     <link rel="manifest" href="/manifest.json" />
   </head>

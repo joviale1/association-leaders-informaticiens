@@ -50,8 +50,12 @@ export const ALI_CONFIG = {
   contact: {
     phone1: "01 44 67 31 46", // Président (AGOSSOU Patrice)
     phone2: "01 66 11 21 14", // Secrétaire Général (ZOSSOUNGBO A. Fidèle)
+    phone3: "01 64 90 15 55", // Trésorière Générale (SEMEVO DÉO-GRACIA)
     presidentPhone: "01 44 67 31 46",
     sgPhone: "01 66 11 21 14",
+    treasurerPhone: "01 64 90 15 55",
+    treasurerName: "SEMEVO DÉO-GRACIA",
+    treasurerRole: "Trésorière Générale",
     whatsapp: "01 44 67 31 46", // WhatsApp
     email: "leadersinformaticiens@gmail.com",
     address: "Agamandin, Abomey-Calavi, Bénin",
