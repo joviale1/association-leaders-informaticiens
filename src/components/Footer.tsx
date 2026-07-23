@@ -102,10 +102,9 @@ export default function Footer({ onNavigate }: FooterProps) {
                   </a>
                 </div>
                 <div>
-                  <span className="font-semibold text-white/90">Trésorière Générale (SD) : </span>
-                  <span className="text-white/80 font-medium">{ALI_CONFIG.contact.treasurerName}</span>{" "}
+                  <span className="font-semibold text-white/90">Trésorière Générale : </span>
                   <a href={`tel:${ALI_CONFIG.contact.treasurerPhone.replace(/\s+/g, '')}`} className="hover:text-turquoise-500 transition-colors font-mono">
-                    ({ALI_CONFIG.contact.treasurerPhone})
+                    {ALI_CONFIG.contact.treasurerPhone}
                   </a>
                 </div>
               </div>
