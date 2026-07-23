@@ -183,38 +183,38 @@ export const ALI_CONFIG = {
   formations: [
     {
       id: "f1",
-      title: "Initiation à l'informatique & MS Word",
-      duration: "2 semaines",
-      price: "10 000 F",
-      details: ["Prise en main de l'ordinateur", "Windows & navigation", "Mise en page professionnelle sur Word", "Saisie rapide"]
+      title: "Initiation WORD",
+      duration: "1 mois",
+      price: "10 000 FCFA",
+      details: ["WORD"]
     },
     {
       id: "f2",
-      title: "Maîtrise d'Excel (Niveau Intermédiaire)",
-      duration: "3 semaines",
-      price: "15 000 F",
-      details: ["Formules et fonctions de base", "Gestion de tableaux de données", "Création de graphiques", "Mise en page de tableaux"]
+      title: "Opération de saisie (OPS)",
+      duration: "3 mois",
+      price: "25 000 FCFA",
+      details: ["WINDOWS", "PAINT", "WORD", "EXCEL"]
     },
     {
       id: "f3",
-      title: "Bureautique Complète (Word + Excel + PowerPoint)",
-      duration: "1 mois",
-      price: "25 000 F",
-      details: ["Rapports professionnels", "Présentations percutantes", "Tableurs avancés", "Raccourcis productivité"]
+      title: "Opération de saisie (OPS) et bureautique",
+      duration: "6 mois",
+      price: "60 000 FCFA",
+      details: ["WINDOWS", "WORD", "EXCEL", "POWERPOINT", "PUBLISHER", "PAINT"]
     },
     {
       id: "f4",
-      title: "Infographie & Design (Photoshop / Illustrator)",
-      duration: "1 mois",
-      price: "30 000 F",
-      details: ["Retouche d'images", "Création d'affiches & flyers", "Logo & identité visuelle", "Formats d'exportation"]
+      title: "Opération de saisie (OPS), bureautique et Graphisme",
+      duration: "1 an",
+      price: "130 000 FCFA",
+      details: ["WINDOWS", "WORD", "EXCEL", "POWERPOINT", "PUBLISHER", "PAINT", "INTERNET", "PHOTOSHOP", "In DESIGN"]
     },
     {
       id: "f5",
-      title: "Sérigraphie Complète & Impression Textile",
-      duration: "1,5 mois",
-      price: "160 000 F",
-      details: ["Techniques d'insolation de cadres", "Mélanges de peintures textiles", "Impression manuelle & mécanique", "Gestion d'un atelier de sérigraphie"]
+      title: "Opération de saisie (OPS), bureautique, Graphisme et Sérigraphie",
+      duration: "1 an 3 mois",
+      price: "160 000 FCFA",
+      details: ["WINDOWS", "WORD", "EXCEL", "POWERPOINT", "PUBLISHER", "PAINT", "INTERNET", "PHOTOSHOP", "In DESIGN", "Sérigraphie"]
     }
   ] as TrainingModule[],
 
